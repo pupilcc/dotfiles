@@ -108,7 +108,7 @@ proxyUrl=${winip}:7890
 # Proxy configuration
 #ssh_proxy="${winip}:7890"
 getIp() {
-    export winip=$(ip route | grep default | awk '{print $3}')
+    export winip=$(cat /etc/resolv.conf |grep -oP '(?<=nameserver\ ).*')
     export wslip=$(hostname -I | awk '{print $1}')
     export PROXY_SOCKS5="socks5://${winip}:7890"
     export PROXY_HTTP="http://${winip}:7890"
